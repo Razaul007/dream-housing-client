@@ -5,6 +5,10 @@ import AllProperties from "../pages/AllProperties/AllProperties";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import DashboardLayout from "../layouts/DashboardLayout";
+import Statistics from "../pages/Dashboard/Common/Statistics";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
+import Profile from "../pages/Dashboard/Common/Profile";
 
 
 
@@ -29,7 +33,38 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
         {
             path:'/signup',
             element:<SignUp/>
-        }
+        },
+       
+       
       ]
     },
+    {
+      path:'/dashboard',
+      element: <DashboardLayout/>,
+      children:[
+        {
+          index: true,
+          element: (
+            
+              <Statistics />
+            
+          ),
+        },
+        {
+          path: 'manage-users',
+          element: (
+              <ManageUsers />
+           
+          ),
+        },
+        {
+          path: 'profile',
+          element: (
+          
+              <Profile />
+           
+          ),
+        },
+      ]
+    }
   ]);
