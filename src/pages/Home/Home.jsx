@@ -1,9 +1,11 @@
 import React from 'react';
+import AllProperties from '../AllProperties/AllProperties';
 
 const Home = () => {
     return (
         <div>
-            <h1>This is Home!</h1>
+            <h1>This is home!</h1>
+            <AllProperties/>
         </div>
     );
 };

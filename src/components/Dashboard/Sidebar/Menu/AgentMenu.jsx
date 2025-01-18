@@ -10,9 +10,9 @@ const AgentMenu = () => {
             <MenuItem
                 icon={FaHouse}
                 label='Add Property'
-                address='add-plant'
+                address='add-property'
             />
-            <MenuItem icon={MdHomeWork} label='My Inventory' address='my-inventory' />
+            <MenuItem icon={MdHomeWork} label='My Properties' address='my-properties' />
             <MenuItem
                 icon={MdOutlineManageHistory}
                 label='Manage Orders'

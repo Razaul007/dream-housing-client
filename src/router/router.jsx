@@ -1,7 +1,5 @@
 import {createBrowserRouter} from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
-import Home from "../pages/Home/Home";
-import AllProperties from "../pages/AllProperties/AllProperties";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
@@ -9,6 +7,12 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import Statistics from "../pages/Dashboard/Common/Statistics";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import Profile from "../pages/Dashboard/Common/Profile";
+import AddProperty from "../pages/Dashboard/Agent/AddProperty";
+import MyProperties from "../pages/Dashboard/Agent/MyProperties";
+import Home from "../pages/Home/Home";
+import UpdateProperty from "../pages/UpdateProperty";
+import PropertyDetails from "../pages/PropertyDetails";
+
 
 
 
@@ -22,10 +26,10 @@ import Profile from "../pages/Dashboard/Common/Profile";
             path:"/",
             element:<Home/>
         },
-        {
-            path:"all-properties",
-            element: <AllProperties/>
-        },
+        // {
+        //     path:"all-properties",
+        //     element: <AllProperties/>
+        // },
         {
             path:"/login",
             element:<Login/>
@@ -34,7 +38,10 @@ import Profile from "../pages/Dashboard/Common/Profile";
             path:'/signup',
             element:<SignUp/>
         },
-       
+        {
+          path: 'property/:id',
+          element: <PropertyDetails/>
+        },
        
       ]
     },
@@ -65,6 +72,19 @@ import Profile from "../pages/Dashboard/Common/Profile";
            
           ),
         },
+        {
+          path: 'add-property',
+          element: <AddProperty />
+        },
+        {
+          path: 'my-properties',
+          element: <MyProperties />
+        },
+        {
+          path: 'update/:id',
+          element: <UpdateProperty />
+        },
+      
       ]
     }
   ]);
