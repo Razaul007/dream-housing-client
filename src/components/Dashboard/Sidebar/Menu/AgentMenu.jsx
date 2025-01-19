@@ -15,9 +15,15 @@ const AgentMenu = () => {
             <MenuItem icon={MdHomeWork} label='My Properties' address='my-properties' />
             <MenuItem
                 icon={MdOutlineManageHistory}
-                label='Manage Orders'
-                address='manage-orders'
+                label='Requested Properties'
+                address='requested-properties'
             />
+            <MenuItem
+                icon={MdOutlineManageHistory}
+                label='My Sold Properties'
+                address='sold-properties'
+            />
+          
         </>
     );
 };

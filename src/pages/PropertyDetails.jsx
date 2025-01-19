@@ -7,6 +7,7 @@ import useAuth from '../hooks/useAuth';
 
 const PropertyDetails = () => {
     const {user} = useAuth();
+    console.log(user)
     const { id } = useParams(); // Get property ID from route
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [reviewText, setReviewText] = useState("");
@@ -31,23 +32,49 @@ const PropertyDetails = () => {
     });
 
     // Add property to wishlist
+  
     const handleAddToWishlist = async () => {
         try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/wishlist`, { id });
+            const propertyData = {
+                id,                     
+                image: property?.imageURL, 
+                title: property?.title,    
+                location: property?.location,
+                agent: {
+                    name:property?.agent?.name,       
+                    image: property?.agent?.image,  
+                },
+                status: property.verificationStatus,      
+                minPrice: property?.minPrice, 
+                maxPrice: property?.maxPrice  
+            };
+        //  console.log(propertyData)
+            await axios.post(`${import.meta.env.VITE_API_URL}/wishlist`, propertyData);
+    
             alert("Property added to wishlist!");
         } catch (error) {
             console.error("Failed to add property to wishlist:", error);
         }
     };
+    
 
     // Add a review
     const handleAddReview = async () => {
         
         try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/reviews`, { id, reviewText });
-            setIsModalOpen(false); // Close modal
-            refetchReviews(); // Refresh reviews
-            setReviewText(""); // Clear input
+            const reviewData = {
+                id,    
+                title:property.title,                 
+                image: user?.photoURL, 
+                name: user?.displayName, 
+                email: user?.email, 
+                text:reviewText ,   
+            
+            };
+            await axios.post(`${import.meta.env.VITE_API_URL}/reviews`,reviewData);
+            setIsModalOpen(false);
+            refetchReviews(); 
+            setReviewText("");
         } catch (error) {
             console.error("Failed to add review:", error);
         }

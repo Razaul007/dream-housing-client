@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import LoadingSpinner from "../components/LoadingSpinner";
 import useAxiosSecure from "../hooks/useAxiosSecure";
@@ -10,7 +10,7 @@ const UpdateProperty = () => {
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const [property, setProperty] = useState(null);
- console.log(property);
+  console.log(property);
   // Fetch the property details
   useEffect(() => {
     const fetchProperty = async () => {
@@ -29,7 +29,8 @@ const UpdateProperty = () => {
     e.preventDefault();
 
     try {
-      await axiosSecure.put(`/update/${property._id}`, property);
+      const { _id, ...dataToUpdate } = property; // Exclude _id from the request
+      await axiosSecure.put(`/update/${_id}`, dataToUpdate);
       toast.success("Property updated successfully!");
       navigate("/dashboard/my-properties");
     } catch (err) {
@@ -43,7 +44,7 @@ const UpdateProperty = () => {
     setProperty((prev) => ({ ...prev, [name]: value }));
   };
 
-  if (!property) return <LoadingSpinner/>;
+  if (!property) return <LoadingSpinner />;
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
@@ -93,7 +94,7 @@ const UpdateProperty = () => {
               placeholder="Max Price"
             />
           </div>
-  
+
         </div>
         <button
           type="submit"

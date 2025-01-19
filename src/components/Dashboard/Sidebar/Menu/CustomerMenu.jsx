@@ -2,6 +2,8 @@ import { BsFingerprint } from 'react-icons/bs'
 import { GrUserAdmin } from 'react-icons/gr'
 import { useState } from 'react'
 import MenuItem from './MenuItem'
+import { FaHouse } from 'react-icons/fa6'
+import { MdOutlineRateReview } from 'react-icons/md'
 // import BecomeSellerModal from '../../../Modal/BecomeSellerModal'
 const CustomerMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -12,7 +14,9 @@ const CustomerMenu = () => {
 
   return (
     <>
-      <MenuItem icon={BsFingerprint} label='My Orders' address='my-orders' />
+      <MenuItem icon={BsFingerprint} label='My Wishlist' address='my-wishlist' />
+      <MenuItem icon={FaHouse} label='Property bought' address='Property-bought' />
+      <MenuItem icon={MdOutlineRateReview} label='My reviews' address='my-reviews' />
 
       <div
         onClick={() => setIsOpen(true)}
