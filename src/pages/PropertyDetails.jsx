@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -7,6 +7,7 @@ import useAuth from '../hooks/useAuth';
 
 const PropertyDetails = () => {
     const {user} = useAuth();
+    const navigate = useNavigate();
     console.log(user)
     const { id } = useParams(); // Get property ID from route
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,7 +37,12 @@ const PropertyDetails = () => {
     const handleAddToWishlist = async () => {
         try {
             const propertyData = {
-                id,                     
+                id,
+                customer: {
+                    email:user?.email,
+                    name:user.displayName,
+                    image:user.photoURL
+                },                     
                 image: property?.imageURL, 
                 title: property?.title,    
                 location: property?.location,
@@ -52,6 +58,8 @@ const PropertyDetails = () => {
             await axios.post(`${import.meta.env.VITE_API_URL}/wishlist`, propertyData);
     
             alert("Property added to wishlist!");
+        //    navigate("dashboard/my-wishlist")
+        navigate('/dashboard/my-wishlist')
         } catch (error) {
             console.error("Failed to add property to wishlist:", error);
         }

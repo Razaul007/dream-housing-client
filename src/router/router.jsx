@@ -12,6 +12,9 @@ import MyProperties from "../pages/Dashboard/Agent/MyProperties";
 import Home from "../pages/Home/Home";
 import UpdateProperty from "../pages/UpdateProperty";
 import PropertyDetails from "../pages/PropertyDetails";
+import Wishlist from "../pages/Dashboard/Customer/Wishlist";
+import MakeOffer from "../pages/Dashboard/Customer/MakeOffer";
+import PropertyBought from "../pages/Dashboard/Customer/PropertyBought";
 
 
 
@@ -83,6 +86,18 @@ import PropertyDetails from "../pages/PropertyDetails";
         {
           path: 'update/:id',
           element: <UpdateProperty />
+        },
+        {
+          path: 'my-wishlist',
+          element: <Wishlist />
+        },
+        {
+          path: 'make-offer',
+          element: <MakeOffer />
+        },
+        {
+          path: 'property-bought',
+          element: <PropertyBought />
         },
       
       ]

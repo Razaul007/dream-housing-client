@@ -15,7 +15,7 @@ const CustomerMenu = () => {
   return (
     <>
       <MenuItem icon={BsFingerprint} label='My Wishlist' address='my-wishlist' />
-      <MenuItem icon={FaHouse} label='Property bought' address='Property-bought' />
+      <MenuItem icon={FaHouse} label='Property bought' address='property-bought' />
       <MenuItem icon={MdOutlineRateReview} label='My reviews' address='my-reviews' />
 
       <div
