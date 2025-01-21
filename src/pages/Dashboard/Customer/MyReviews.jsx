@@ -12,9 +12,9 @@ const MyReviews = () => {
   console.log(reviews)
     // Fetch reviews for the logged-in user
     const { isLoading, refetch } = useQuery({
-        queryKey: ["myReviews", user.email],
+        queryKey: ["myReviews", user?.email],
         queryFn: async () => {
-            const { data } = await axiosSecure.get(`/reviews/${user.email}`);
+            const { data } = await axiosSecure.get(`/reviews/${user?.email}`);
             setReviews(data);
             return data;
         },
@@ -52,7 +52,7 @@ const MyReviews = () => {
                             className="w-12 h-12 object-cover rounded-full mb-2"
                         />
                         <p className="text-sm text-gray-600">Agent: {review.name}</p>
-                        <p className="text-sm text-gray-500">Reviewed by: {review.email}</p>
+                        <p className="text-sm text-gray-500">Reviewed by: {review?.email}</p>
                         <p className="mt-2">{review.text}</p>
                         <button
                             onClick={() => handleDelete(review._id)}

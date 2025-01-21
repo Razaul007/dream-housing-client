@@ -50,6 +50,7 @@ const PropertyDetails = () => {
                 location: property?.location,
                 agent: {
                     name:property?.agent?.name,       
+                    email:property?.agent?.email,       
                     image: property?.agent?.image,  
                 },
                 status: property.verificationStatus,      

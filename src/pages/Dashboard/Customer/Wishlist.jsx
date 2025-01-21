@@ -50,6 +50,7 @@ const Wishlist = () => {
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {wishlist.map((property) => (
+                        
                         <div key={property._id} className="p-4 bg-white shadow-md rounded-lg">
                             <img
                                 src={property.image}
@@ -59,6 +60,7 @@ const Wishlist = () => {
                             <h3 className="text-xl font-bold">{property.title}</h3>
                             <p>Location: {property.location}</p>
                             <p>Agent: {property.agent.name}</p>
+                            <p>Agent Email: {property.agent.email}</p>
                             <img
                                 src={property.agent.image}
                                 alt={property.agent.name}

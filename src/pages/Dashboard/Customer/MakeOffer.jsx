@@ -31,6 +31,7 @@ const MakeOffer = () => {
                 image: property.image,
                 location: property.location,
                 agentName: property.agent.name,
+                agentEmail: property.agent.email,
                 offerAmount,
                 buyerEmail: property.customer.email, 
                 buyerName:property.customer.name,  
@@ -74,6 +75,15 @@ const MakeOffer = () => {
                     <input
                         type="text"
                         value={property.agent.name}
+                        readOnly
+                        className="w-full border rounded-md p-2"
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block font-semibold">Agent Email</label>
+                    <input
+                        type="email"
+                        value={property.agent.email}
                         readOnly
                         className="w-full border rounded-md p-2"
                     />
