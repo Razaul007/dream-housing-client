@@ -16,7 +16,7 @@ const CustomerMenu = () => {
     <>
       <MenuItem icon={BsFingerprint} label='My Wishlist' address='my-wishlist' />
       <MenuItem icon={FaHouse} label='Property bought' address='property-bought' />
-      <MenuItem icon={MdOutlineRateReview} label='My reviews' address='my-reviews' />
+      <MenuItem icon={MdOutlineRateReview} label='My Reviews' address='my-reviews' />
 
       <div
         onClick={() => setIsOpen(true)}

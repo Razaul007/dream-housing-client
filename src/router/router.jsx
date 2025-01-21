@@ -15,6 +15,7 @@ import PropertyDetails from "../pages/PropertyDetails";
 import Wishlist from "../pages/Dashboard/Customer/Wishlist";
 import MakeOffer from "../pages/Dashboard/Customer/MakeOffer";
 import PropertyBought from "../pages/Dashboard/Customer/PropertyBought";
+import MyReviews from "../pages/Dashboard/Customer/MyReviews";
 
 
 
@@ -98,6 +99,10 @@ import PropertyBought from "../pages/Dashboard/Customer/PropertyBought";
         {
           path: 'property-bought',
           element: <PropertyBought />
+        },
+        {
+          path: 'my-reviews',
+          element: <MyReviews />
         },
       
       ]

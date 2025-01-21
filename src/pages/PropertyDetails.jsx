@@ -4,6 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import LoadingSpinner from '../components/LoadingSpinner';
 import useAuth from '../hooks/useAuth';
+import { isDate } from 'date-fns';
+
 
 const PropertyDetails = () => {
     const {user} = useAuth();
@@ -76,13 +78,15 @@ const PropertyDetails = () => {
                 image: user?.photoURL, 
                 name: user?.displayName, 
                 email: user?.email, 
-                text:reviewText ,   
+                text:reviewText , 
+                reviewTime: new isDate()
             
             };
             await axios.post(`${import.meta.env.VITE_API_URL}/reviews`,reviewData);
             setIsModalOpen(false);
             refetchReviews(); 
             setReviewText("");
+            navigate('/dashboard/my-reviews');
         } catch (error) {
             console.error("Failed to add review:", error);
         }
