@@ -4,12 +4,34 @@ import { useState } from 'react'
 import MenuItem from './MenuItem'
 import { FaHouse } from 'react-icons/fa6'
 import { MdOutlineRateReview } from 'react-icons/md'
-// import BecomeSellerModal from '../../../Modal/BecomeSellerModal'
+import BecomeAgentModal from '../../../Modal/BecomeAgentModal'
+import useAuth from '../../../../hooks/useAuth'
+import useAxiosSecure from '../../../../hooks/useAxiosSecure'
+import toast from 'react-hot-toast'
+
+
+
 const CustomerMenu = () => {
+  const {user} = useAuth();
+  const axiosSecure = useAxiosSecure()
   const [isOpen, setIsOpen] = useState(false)
 
   const closeModal = () => {
     setIsOpen(false)
+  }
+
+  const requestHandler = async () => {
+    try {
+      // send a request to server
+      const { data } = await axiosSecure.patch(`/users/${user?.email}`)
+      console.log(data)
+      toast.success('Successfully Applied to become an Agent!👍')
+    } catch (err) {
+      console.log(err.response.data)
+      toast.error(err.response.data + '👊')
+    } finally {
+      closeModal()
+    }
   }
 
   return (
@@ -28,6 +50,7 @@ const CustomerMenu = () => {
       </div>
 
       {/* <BecomeSellerModal closeModal={closeModal} isOpen={isOpen} /> */}
+      <BecomeAgentModal requestHandler={requestHandler} closeModal={closeModal} isOpen={isOpen} />
     </>
   )
 }

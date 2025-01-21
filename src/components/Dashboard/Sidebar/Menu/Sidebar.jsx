@@ -10,8 +10,10 @@ import AgentMenu from './AgentMenu'
 import AdminMenu from './AdminMenu'
 import CustomerMenu from './CustomerMenu'
 import useAuth from '../../../../hooks/useAuth'
+import useRole from '../../../../hooks/useRole'
 const Sidebar = () => {
   const { logOut } = useAuth()
+  const [role, isLoading] = useRole();
   const [isActive, setActive] = useState(false)
 
   // Sidebar Responsive Handler
@@ -67,18 +69,14 @@ const Sidebar = () => {
 
           {/* Nav Items */}
           <div className='flex flex-col justify-between flex-1 mt-6'>
-            <nav>
+            
+              <nav>
               {/*  Menu Items */}
-              <CustomerMenu />
-              <AgentMenu/>
-
-              <MenuItem
-                icon={BsGraphUp}
-                label='Statistics'
-                address='/dashboard'
-              />
-              <AdminMenu />
+              {role === 'customer' && <CustomerMenu />}
+              {role === 'agent' && <AgentMenu />}
+              {role === 'admin' && <AdminMenu />}
             </nav>
+         
           </div>
         </div>
 

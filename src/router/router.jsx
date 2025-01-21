@@ -16,6 +16,8 @@ import Wishlist from "../pages/Dashboard/Customer/Wishlist";
 import MakeOffer from "../pages/Dashboard/Customer/MakeOffer";
 import PropertyBought from "../pages/Dashboard/Customer/PropertyBought";
 import MyReviews from "../pages/Dashboard/Customer/MyReviews";
+import PrivateRoute from "./PrivateRoute";
+import AgentRoute from "./AgentRoute";
 
 
 
@@ -30,10 +32,7 @@ import MyReviews from "../pages/Dashboard/Customer/MyReviews";
             path:"/",
             element:<Home/>
         },
-        // {
-        //     path:"all-properties",
-        //     element: <AllProperties/>
-        // },
+
         {
             path:"/login",
             element:<Login/>
@@ -51,7 +50,9 @@ import MyReviews from "../pages/Dashboard/Customer/MyReviews";
     },
     {
       path:'/dashboard',
-      element: <DashboardLayout/>,
+      element: <PrivateRoute>
+                  <DashboardLayout/>
+               </PrivateRoute>,
       children:[
         {
           index: true,
@@ -78,31 +79,43 @@ import MyReviews from "../pages/Dashboard/Customer/MyReviews";
         },
         {
           path: 'add-property',
-          element: <AddProperty />
+          element: <AgentRoute>
+                     <AddProperty />
+                   </AgentRoute>
         },
         {
           path: 'my-properties',
-          element: <MyProperties />
+          element:<AgentRoute>
+                     <MyProperties />
+                  </AgentRoute>
         },
         {
           path: 'update/:id',
-          element: <UpdateProperty />
+          element: <AgentRoute>
+                     <UpdateProperty />
+                   </AgentRoute>
         },
         {
           path: 'my-wishlist',
-          element: <Wishlist />
+          element: <PrivateRoute>
+                      <Wishlist />
+                   </PrivateRoute>
         },
         {
           path: 'make-offer',
-          element: <MakeOffer />
+          element:<PrivateRoute>
+                        <MakeOffer />
+                  </PrivateRoute>
         },
         {
           path: 'property-bought',
-          element: <PropertyBought />
+          element: <PrivateRoute>
+                      <PropertyBought />
+                  </PrivateRoute>
         },
         {
           path: 'my-reviews',
-          element: <MyReviews />
+          element: <PrivateRoute><MyReviews /></PrivateRoute>
         },
       
       ]
