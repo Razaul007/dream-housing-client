@@ -5,10 +5,13 @@ import LoadingSpinner from "../../../components/LoadingSpinner";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 
 const MyProperties = () => {
+  const navigate = useNavigate();
+
     const axiosSecure = useAxiosSecure()
     const {
       data: properties = [],

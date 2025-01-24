@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { TbFidgetSpinner } from 'react-icons/tb'
 import { saveUser } from '../../api/utils'
 import LoadingSpinner from '../../components/LoadingSpinner'
+import Swal from 'sweetalert2'
 
 const Login = () => {
   const { signIn, signInWithGoogle, loading, user } = useAuth()
@@ -25,8 +26,15 @@ const Login = () => {
       await signIn(email, password)
 
       // navigate(from, { replace: true })
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Login Successful!",
+        showConfirmButton: false,
+        timer: 1500
+      });
       navigate("/")
-      toast.success('Login Successful')
+
     } catch (err) {
       console.log(err)
       toast.error(err?.message)
@@ -41,7 +49,16 @@ const Login = () => {
       // save user info in db if the user is new
       await saveUser(data?.user)
       navigate(from, { replace: true })
-      toast.success('Login Successful')
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Login Successful",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      navigate("/")
+
+      // toast.success('Login Successful')
     } catch (err) {
       console.log(err)
       toast.error(err?.message)
