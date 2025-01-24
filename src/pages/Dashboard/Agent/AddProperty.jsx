@@ -2,11 +2,10 @@
 
 import React, { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
-
 import useAxiosSecure from './../../../hooks/useAxiosSecure';
-import { toast } from 'react-toastify';
 import { imageUpload } from "../../../api/utils";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 
 
@@ -16,9 +15,9 @@ const AddProperty = () => {
     const axiosSecure= useAxiosSecure();
     const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState([]);
-    // console.table(formData)
+   
 
-   console.log(formData)
+
     const handleSubmit = async e => {
         e.preventDefault()
         setLoading(true)

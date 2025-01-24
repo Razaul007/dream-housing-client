@@ -96,7 +96,7 @@ const PropertyDetails = () => {
     if (propertyLoading || reviewsLoading) return <div><LoadingSpinner/></div>;
 
     return (
-        <div className=" w-3/4 mx-auto flex items-center gap-10 p-6">
+        <div className=" lg:w-3/4 mx-auto lg:flex items-center gap-10 p-6">
             {/* Property Details Section */}
             <div className='p-10 rounded-xl'>
                 <img

@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { GrLogout } from 'react-icons/gr'
 import { FcSettings } from 'react-icons/fc'
 import { AiOutlineBars } from 'react-icons/ai'
-import { BsGraphUp } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import logo from '/logo.jpg'
 import MenuItem from './MenuItem'
@@ -11,9 +10,10 @@ import AdminMenu from './AdminMenu'
 import CustomerMenu from './CustomerMenu'
 import useAuth from '../../../../hooks/useAuth'
 import useRole from '../../../../hooks/useRole'
+
 const Sidebar = () => {
   const { logOut } = useAuth()
-  const [role, isLoading] = useRole();
+  const [role] = useRole();
   const [isActive, setActive] = useState(false)
 
   // Sidebar Responsive Handler
@@ -28,7 +28,7 @@ const Sidebar = () => {
           <div className='block cursor-pointer p-4 font-bold'>
             <Link to='/'>
               <img
-                // className='hidden md:block'
+                className='hidden md:block'
                 src={logo}
                 alt='logo'
                 width='100'
@@ -48,7 +48,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 lg:w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
           isActive && '-translate-x-full'
         }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
@@ -57,7 +57,7 @@ const Sidebar = () => {
             <div className='w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-lime-100 mx-auto'>
               <Link to='/'>
                 <img
-                  // className='hidden md:block'
+                  className='hidden md:block'
                   src={logo}
                   alt='logo'
                   width='100'
@@ -72,9 +72,12 @@ const Sidebar = () => {
             
               <nav>
               {/*  Menu Items */}
-              {role === 'customer' && <CustomerMenu />}
-              {role === 'agent' && <AgentMenu />}
-              {role === 'admin' && <AdminMenu />}
+             
+               {role === 'customer' && <CustomerMenu />},
+               {role === 'agent' && <AgentMenu />}
+               {role === 'admin' && <AdminMenu />}
+             
+          
             </nav>
          
           </div>

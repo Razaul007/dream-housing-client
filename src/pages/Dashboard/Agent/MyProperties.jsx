@@ -1,45 +1,31 @@
 
-import { toast } from "react-toastify";
-// import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
+
 import LoadingSpinner from "../../../components/LoadingSpinner";
+import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useAuth from "../../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+
 
 const MyProperties = () => {
-    const { user } = useAuth();
-    const navigate = useNavigate();
-    console.log("Authenticated User:", user);
     const axiosSecure = useAxiosSecure()
-
-    const { data: properties,
-        isLoading, refetch } = useQuery({
-            queryKey: ['properties'],
-            queryFn: async () => {
-                const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/properties/agent`)
-                console.log(data)
-                return data
-            },
-        })
+    const {
+      data: properties = [],
+      isLoading,
+      refetch,
+    } = useQuery({
+      queryKey: ['properties'],
+      queryFn: async () => {
+        const { data } = await axiosSecure(`/properties/agent`)
+  
+        return data
+      },
+    })
+    console.log(properties)
     if (isLoading) return <LoadingSpinner />
 
 
-    // Handle Delete Property
-    //   const handleDelete = async (id) => {
-    //     if (!window.confirm("Are you sure you want to delete this property?")) return;
-
-    //     try {
-    //       await axiosSecure.delete(`/properties/${id}`);
-    //       setProperties(properties.filter((property) => property._id !== id));
-    //       toast.success("Property deleted successfully!");
-    //     } catch (err) {
-    //       console.error("Error deleting property:", err);
-    //       toast.error("Failed to delete property.");
-    //     }
-    //   };
-
-  
     const handleDelete = async (id) => {
         if (!window.confirm("Are you sure you want to delete this property?")) return;
 
@@ -49,7 +35,7 @@ const MyProperties = () => {
             toast.success("Property deleted successfully!");
 
             refetch();
-        
+
         } catch (err) {
             console.error("Error deleting property:", err);
             toast.error("Failed to delete property.");

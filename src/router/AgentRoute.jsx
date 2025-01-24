@@ -8,7 +8,7 @@ const AgentRoute = ({ children }) => {
   const [role, isLoading] = useRole()
 
   if (isLoading) return <LoadingSpinner />
-  if (role === 'seller') return children
+  if (role === 'agent') return children
   return <Navigate to='/dashboard' replace='true' />
 }
 

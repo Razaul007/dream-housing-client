@@ -13,16 +13,15 @@ import {
 import { app } from '../firebase/firebase.config'
 import axios from 'axios'
 
-
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
 const googleProvider = new GoogleAuthProvider()
 
 const AuthProvider = ({ children }) => {
- 
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   const createUser = (email, password) => {
     setLoading(true)
@@ -42,7 +41,6 @@ const AuthProvider = ({ children }) => {
   const logOut = async () => {
     setLoading(true)
     return signOut(auth)
-   
   }
 
   const updateUserProfile = (name, photo) => {
@@ -52,48 +50,33 @@ const AuthProvider = ({ children }) => {
     })
   }
 
-
+  // onAuthStateChange
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, currentUser => {
-        setUser(currentUser);
-        setLoading(false);
-        console.log(currentUser);
-        if (currentUser) {
-            const user = currentUser.email;
-            
-            axios.post(
-              `${import.meta.env.VITE_API_URL}/users`,
-              {
-                name: currentUser?.displayName,
-                image: currentUser?.photoURL,
-                email: currentUser?.email,
-                role:'customer'
-              }
-            )
+    const unsubscribe = onAuthStateChanged(auth, async currentUser => {
+      console.log('CurrentUser-->', currentUser)
+      if (currentUser?.email) {
+        setUser(currentUser)
 
-            // jwt
-            axios.post(`${import.meta.env.VITE_API_URL}/authentication`, user, {
-                withCredentials:true
-            })
-                .then(data => {
-                    console.log(data.data)
-                    if (data.data) {
-                        localStorage.setItem('access-token', data?.data?.token)
-                        setLoading(false);
-                    }
-                })
-
-        } else {
-            localStorage.removeItem('access-token');
-            setLoading(false);
-        }
-
-
+        // Get JWT token
+        await axios.post(
+          `${import.meta.env.VITE_API_URL}/jwt`,
+          {
+            email: currentUser?.email,
+          },
+          { withCredentials: true }
+        )
+      } else {
+        setUser(currentUser)
+        await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
+          withCredentials: true,
+        })
+      }
+      setLoading(false)
     })
     return () => {
-        return unsubscribe();
+      return unsubscribe()
     }
-}, [])
+  }, [])
 
   const authInfo = {
     user,

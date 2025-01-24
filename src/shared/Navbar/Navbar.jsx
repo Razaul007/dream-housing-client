@@ -1,9 +1,7 @@
 
-
-// import Container from '../Container'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 import avatarImg from '../../assets/images/placeholder.jpg'
 import logo from '/logo.jpg'
@@ -15,15 +13,28 @@ const Navbar = () => {
     return (
         <div className=' w-full bg-white  shadow-sm mb-5'>
             <div className='py-4 border-b-[1px]'>
-                {/* <Container> */}
                 <div className='flex flex-row  items-center justify-between gap-3 md:gap-0'>
                     {/* Logo */}
-                    <div className='flex items-center gap-1'>
+                    <div className='flex items-center gap-1 '>
                         <Link >
                             <img src={logo} alt='logo' width='100' height='100' />
                         </Link>
                         <h1 className='text-3xl font-bold'>DreamHouzing</h1>
 
+                    </div>
+                    <div className=' flex justify-center items-center '>
+                        <NavLink
+                            to='/'
+                            className='hidden lg:block  px-4 py-3 hover:bg-neutral-100 transition font-bold'
+                        >
+                            Home
+                        </NavLink>
+                        <NavLink
+                            to='/all-properties'
+                            className='hidden lg:block  px-4 py-3 hover:bg-neutral-100 transition font-bold'
+                        >
+                            All Properties
+                        </NavLink>
                     </div>
                     {/* Dropdown Menu */}
                     <div className='relative'>
@@ -55,6 +66,12 @@ const Navbar = () => {
                                         className='block md:hidden px-4 py-3 hover:bg-neutral-100 transition font-semibold'
                                     >
                                         Home
+                                    </Link>
+                                    <Link
+                                        to='/all-properties'
+                                        className='block md:hidden px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                                    >
+                                        All Properties
                                     </Link>
 
                                     {user ? (

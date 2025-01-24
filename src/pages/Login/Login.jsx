@@ -1,10 +1,9 @@
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
-
+import useAuth from '../../hooks/useAuth'
 import toast from 'react-hot-toast'
 import { TbFidgetSpinner } from 'react-icons/tb'
-
-import useAuth from '../../hooks/useAuth'
+import { saveUser } from '../../api/utils'
 import LoadingSpinner from '../../components/LoadingSpinner'
 
 const Login = () => {
@@ -12,8 +11,8 @@ const Login = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const from = location?.state?.from?.pathname || '/'
-  if (user) return <Navigate to={from} replace={true} />
   if (loading) return <LoadingSpinner />
+  if (user) return <Navigate to={from} replace={true} />
   // form submit handler
   const handleSubmit = async event => {
     event.preventDefault()
@@ -25,7 +24,8 @@ const Login = () => {
       //User Login
       await signIn(email, password)
 
-      navigate(from, { replace: true })
+      // navigate(from, { replace: true })
+      navigate("/")
       toast.success('Login Successful')
     } catch (err) {
       console.log(err)
@@ -37,7 +37,9 @@ const Login = () => {
   const handleGoogleSignIn = async () => {
     try {
       //User Registration using google
-      await signInWithGoogle()
+      const data = await signInWithGoogle()
+      // save user info in db if the user is new
+      await saveUser(data?.user)
       navigate(from, { replace: true })
       toast.success('Login Successful')
     } catch (err) {

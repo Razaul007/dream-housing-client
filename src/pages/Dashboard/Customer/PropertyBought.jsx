@@ -18,6 +18,11 @@ const PropertyBought = () => {
     });
     console.log(boughtProperties)
 
+     // Redirect to payment page
+  const handlePayment = (property) => {
+    navigate(`/payment/${property._id}`, { state: property });
+  };
+
     if (isLoading) return <LoadingSpinner />;
 
     return (
@@ -35,9 +40,22 @@ const PropertyBought = () => {
                             <h3 className="text-xl font-bold">{property.title}</h3>
                             <p>Location: {property.location}</p>
                             <p>Agent: {property.agentName}</p>
-                          
-                            <p>Status: <span className="font-semibold">{property.status}</span></p>
                             <p>Offer Amount: ${property.offerAmount}</p>
+                            <p>Status: <span className="font-semibold">{property.status}</span></p>
+                            {property.status === "accepted" && (
+                                <button
+                                    onClick={() => handlePayment(property)}
+                                    className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+                                >
+                                    Pay
+                                </button>
+                            )}
+                            {property.status === "bought" && (
+                                <p className="mt-4 text-green-600 font-bold">
+                                    Transaction ID: {offer.transactionId}
+                                </p>
+                            )}
+                            
                         </div>
                     ))}
                 </div>
