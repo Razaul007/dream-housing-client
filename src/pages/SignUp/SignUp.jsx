@@ -4,6 +4,7 @@ import useAuth from '../../hooks/useAuth'
 import { toast } from 'react-hot-toast'
 import { TbFidgetSpinner } from 'react-icons/tb'
 import { imageUpload, saveUser } from '../../api/utils'
+import Swal from 'sweetalert2'
 
 const SignUp = () => {
   const { createUser, updateUserProfile, signInWithGoogle, loading } = useAuth()
@@ -29,8 +30,16 @@ const SignUp = () => {
       console.log(result)
       // save user info in db if the user is new
       await saveUser({ ...result?.user, displayName: name, photoURL })
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Registration successful!",
+            showConfirmButton: false,
+            timer: 2500,
+        });
       navigate('/')
-      toast.success('Signup Successful')
+
+      // toast.success('Signup Successful')
     } catch (err) {
       console.log(err)
       toast.error(err?.message)
@@ -109,15 +118,9 @@ const SignUp = () => {
                   Password
                 </label>
               </div>
-              <input
-                type='password'
-                name='password'
-                autoComplete='new-password'
-                id='password'
-                required
-                placeholder='*******'
-                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900'
-              />
+              <  input type="password" id="psw" name="password" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}" title="Must contain at least one number and one uppercase and lowercase letter, and one special character and at least 6 or more characters" className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900' required />
+
+
             </div>
           </div>
 
@@ -157,7 +160,7 @@ const SignUp = () => {
           >
             Login
           </Link>
-        
+
         </p>
       </div>
     </div>

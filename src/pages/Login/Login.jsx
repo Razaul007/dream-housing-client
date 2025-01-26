@@ -7,12 +7,15 @@ import { saveUser } from '../../api/utils'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import Swal from 'sweetalert2'
 
+
 const Login = () => {
   const { signIn, signInWithGoogle, loading, user } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
   const from = location?.state?.from?.pathname || '/'
+
   if (loading) return <LoadingSpinner />
+
   if (user) return <Navigate to={from} replace={true} />
   // form submit handler
   const handleSubmit = async event => {
@@ -25,7 +28,7 @@ const Login = () => {
       //User Login
       await signIn(email, password)
 
-      // navigate(from, { replace: true })
+      navigate(from, { replace: true })
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -33,8 +36,8 @@ const Login = () => {
         showConfirmButton: false,
         timer: 1500
       });
-      navigate("/")
-
+     
+     
     } catch (err) {
       console.log(err)
       toast.error(err?.message)
@@ -56,8 +59,8 @@ const Login = () => {
         showConfirmButton: false,
         timer: 1500
       });
-      navigate("/")
-
+    
+      
       // toast.success('Login Successful')
     } catch (err) {
       console.log(err)
@@ -75,8 +78,6 @@ const Login = () => {
         </div>
         <form
           onSubmit={handleSubmit}
-          noValidate=''
-          action=''
           className='space-y-6 ng-untouched ng-pristine ng-valid'
         >
           <div className='space-y-4'>

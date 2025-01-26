@@ -70,9 +70,18 @@ export const router = createBrowserRouter([
                  <DashboardLayout />
              </PrivateRoute>,
     children: [
-    
+
       {
         index: true,
+        element: (
+
+          <Profile />
+
+        ),
+      },
+    
+      {
+        path:'manage-users' ,
         element: (
           <PrivateRoute>
             <AdminRoute>
@@ -104,14 +113,7 @@ export const router = createBrowserRouter([
 
         ),
       },
-      {
-        path: 'profile',
-        element: (
-
-          <Profile />
-
-        ),
-      },
+   
       {
         path: 'add-property',
         element:   <AddProperty />

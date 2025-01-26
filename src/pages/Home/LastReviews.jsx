@@ -8,7 +8,7 @@ const LastReviews = () => {
     const { data: reviews = [], isLoading, refetch } = useQuery({
         queryKey: ["reviews"],
         queryFn: async () => {
-            const { data } = await axiosSecure.get("/reviews"); // Fetch all reviews
+            const { data } = await axiosSecure.get("/last/reviews"); // Fetch all reviews
             // Sort reviews by time (most recent first) and take the top 3
             return data
                 .sort((a, b) => new Date(b.reviewTime) - new Date(a.reviewTime))
