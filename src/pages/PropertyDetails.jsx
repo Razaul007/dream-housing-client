@@ -80,7 +80,8 @@ const PropertyDetails = () => {
                 name: user?.displayName, 
                 email: user?.email, 
                 text:reviewText , 
-                reviewTime: new isDate()
+                // reviewTime: new Date()
+                reviewTime: new Date().toISOString()
             
             };
             await axios.post(`${import.meta.env.VITE_API_URL}/reviews`,reviewData);
