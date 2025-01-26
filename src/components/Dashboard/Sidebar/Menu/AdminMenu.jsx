@@ -13,7 +13,7 @@ const AdminMenu = () => {
       <MenuItem icon={MdOutlineRateReview} label='Manage reviews' address='Manage-reviews' />
       
     </div>
-  )
+  ) 
 }
 
 export default AdminMenu

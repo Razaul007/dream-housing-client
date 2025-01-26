@@ -4,7 +4,6 @@ import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import DashboardLayout from "../layouts/DashboardLayout";
-import Statistics from "../pages/Dashboard/Common/Statistics";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import Profile from "../pages/Dashboard/Common/Profile";
 import AddProperty from "../pages/Dashboard/Agent/AddProperty";
@@ -71,16 +70,9 @@ export const router = createBrowserRouter([
                  <DashboardLayout />
              </PrivateRoute>,
     children: [
+    
       {
         index: true,
-        element: (
-
-          <Statistics />
-
-        ),
-      },
-      {
-        path: 'manage-users',
         element: (
           <PrivateRoute>
             <AdminRoute>

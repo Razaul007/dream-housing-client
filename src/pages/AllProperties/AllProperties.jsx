@@ -25,7 +25,7 @@ const AllProperties = () => {
     if (isLoading) return <LoadingSpinner />
 
     return (
-        <div className='p-10'>
+        <div className='mt-5'>
             {properties && properties.length > 0 ? (
                 <div className='pt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
                     {properties.map(property => (
