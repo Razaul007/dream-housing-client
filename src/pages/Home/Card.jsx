@@ -46,7 +46,7 @@ const Card = ({ property }) => {
         <div className='font-semibold'>Max Price: {maxPrice}$</div>
         <div className='font-semibold'>Agent: {agent.name}</div>
         {/* <div className='font-semibold'>Agent: {agent.image}</div> */}
-        <div className='font-semibold text-green-400 font-bold'>Status: {verificationStatus}</div>
+        <div className=' text-green-400 font-bold'>Status: {verificationStatus}</div>
         <div >
          
          <button 

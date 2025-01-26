@@ -3,9 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import useAuth from "../../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const PropertyBought = () => {
     const { user } = useAuth();
+    const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
 
     // Fetch bought properties
@@ -52,7 +54,7 @@ const PropertyBought = () => {
                             )}
                             {property.status === "bought" && (
                                 <p className="mt-4 text-green-600 font-bold">
-                                    Transaction ID: {offer.transactionId}
+                                    Sold Property!
                                 </p>
                             )}
                             

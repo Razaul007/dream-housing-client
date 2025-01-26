@@ -13,7 +13,7 @@ import {
 } from '@headlessui/react'
 import { BsCheckLg } from 'react-icons/bs'
 import { AiOutlineDown } from 'react-icons/ai'
-const roles = ['customer', 'agent', 'admin']
+const roles = ['customer', 'agent', 'admin', 'Fraud' ]
 
 const UpdateUserModal = ({ setIsOpen, isOpen, role, updateRole }) => {
   const [selected, setSelected] = useState(role)
@@ -48,7 +48,7 @@ const UpdateUserModal = ({ setIsOpen, isOpen, role, updateRole }) => {
               leaveFrom='opacity-100 scale-100'
               leaveTo='opacity-0 scale-95'
             >
-              <DialogPanel className='w-full h-56 max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+              <DialogPanel className='w-full h-2/3 max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
                 <DialogTitle
                   as='h3'
                   className='text-lg font-medium text-center leading-6 text-gray-900'

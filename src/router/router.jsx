@@ -24,6 +24,8 @@ import ManageReviews from "../pages/Dashboard/Admin/ManageReviews";
 import AllProperties from "../pages/AllProperties/AllProperties";
 import MySoldProperties from "../pages/Dashboard/Agent/MySoldProperties";
 import RequestedProperties from "../pages/Dashboard/Agent/RequestedProperties";
+import Payment from "../pages/Dashboard/Customer/Payment";
+
 
 
 
@@ -47,6 +49,11 @@ export const router = createBrowserRouter([
         path: '/signup',
         element: <SignUp />
       },
+      {
+        path:'payment/:id',
+        element:<Payment/>
+      },
+
       {
         path: '/all-properties',
         element: <PrivateRoute><AllProperties/></PrivateRoute>
@@ -160,8 +167,8 @@ export const router = createBrowserRouter([
       {
         path:'requested-properties',
         element: <RequestedProperties/>
-      }
-
+      },
+    
     ]
   }
 ]);
