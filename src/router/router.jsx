@@ -50,7 +50,7 @@ export const router = createBrowserRouter([
       },
       {
         path:'payment/:id',
-        element:<Payment/>
+        element:<PrivateRoute><Payment/></PrivateRoute>
       },
 
       {
@@ -75,7 +75,7 @@ export const router = createBrowserRouter([
         index: true,
         element: (
 
-          <Profile />
+         <PrivateRoute> <Profile /></PrivateRoute>
 
         ),
       },
@@ -116,19 +116,29 @@ export const router = createBrowserRouter([
    
       {
         path: 'add-property',
-        element:   <AddProperty />
+        element:  
+               <PrivateRoute>
+                  <AgentRoute>
+                     <AddProperty />
+                   </AgentRoute>
+               </PrivateRoute>
+          
                   
                 
       },
       {
         path: 'my-properties',
-        element:   <MyProperties />
+        element:  <PrivateRoute><AgentRoute> 
+                     <MyProperties />
+                 </AgentRoute></PrivateRoute>
                   
                 
       },         
       {
         path: 'update/:id',
-        element: <UpdateProperty />
+        element: <PrivateRoute>
+          <AgentRoute><UpdateProperty /></AgentRoute>
+        </PrivateRoute>
                         
                        
       },
@@ -147,7 +157,7 @@ export const router = createBrowserRouter([
       {
         path: 'property-bought',
         element:
-          <PropertyBought />
+            <PrivateRoute><PropertyBought /></PrivateRoute>
        
       },
       {
@@ -156,11 +166,13 @@ export const router = createBrowserRouter([
       },
       {
         path:'sold-properties',
-        element: <MySoldProperties/>
+        element: <AgentRoute>
+              <PrivateRoute><MySoldProperties/></PrivateRoute>
+        </AgentRoute>
       },
       {
         path:'requested-properties',
-        element: <RequestedProperties/>
+        element: <PrivateRoute><AgentRoute><RequestedProperties/></AgentRoute></PrivateRoute>
       },
     
     ]

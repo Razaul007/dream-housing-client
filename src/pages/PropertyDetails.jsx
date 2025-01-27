@@ -4,7 +4,9 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import LoadingSpinner from '../components/LoadingSpinner';
 import useAuth from '../hooks/useAuth';
-import { isDate } from 'date-fns';
+import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
+
 
 
 const PropertyDetails = () => {
@@ -59,13 +61,24 @@ const PropertyDetails = () => {
             };
         //  console.log(propertyData)
             await axios.post(`${import.meta.env.VITE_API_URL}/wishlist`, propertyData);
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Property added to wishlist!",
+                showConfirmButton: false,
+                timer: 1500
+              });
     
-            alert("Property added to wishlist!");
-        //    navigate("dashboard/my-wishlist")
+           
+       
         navigate('/dashboard/my-wishlist')
         } catch (error) {
-            console.error("Failed to add property to wishlist:", error);
-        }
+            if (error.response && error.response.data.error === "Only users can add properties to the wishlist.") {
+                toast.error("Only users can do this!");
+              
+            } else {
+                toast.error("Failed to add property to wishlist. Please try again.");
+            }}
     };
     
 

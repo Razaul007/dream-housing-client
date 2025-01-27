@@ -61,15 +61,5 @@ const Card = ({ property }) => {
     </Link>
   )
 }
-Card.propTypes = {
-  property: PropTypes.shape({
-    title: PropTypes.string,
-    location: PropTypes.string,
-    verificationStatus: PropTypes.string,
-    minPrice: PropTypes.number,
-    maxPrice: PropTypes.number,
-    imageURL: PropTypes.string,
-    _id: PropTypes.string,
-  }).isRequired,
-}
+
 export default Card

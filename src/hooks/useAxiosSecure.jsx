@@ -1,4 +1,4 @@
-
+/* eslint-disable react/prop-types */
 import axios from 'axios'
 import useAuth from './useAuth'
 import { useEffect } from 'react'

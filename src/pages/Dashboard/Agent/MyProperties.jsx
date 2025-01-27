@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 
 import { useQuery } from "@tanstack/react-query";
-
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -20,7 +20,7 @@ const MyProperties = () => {
     } = useQuery({
       queryKey: ['properties'],
       queryFn: async () => {
-        const { data } = await axiosSecure(`/properties/agent`)
+        const { data } = await axiosSecure.get(`/properties/agent`)
   
         return data
       },

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
-import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
+import Swal from "sweetalert2";
+import { FcGoogle } from "react-icons/fc";
 
 
 const GoogleLogin = () => {

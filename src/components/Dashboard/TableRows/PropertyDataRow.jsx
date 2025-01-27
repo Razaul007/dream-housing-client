@@ -1,10 +1,5 @@
-// import React from 'react';
-// import { useState } from 'react'
-// import UpdateUserModal from '../../Modal/UpdateUserModal'
-// import PropTypes from 'prop-types'
-// import useAxiosSecure from '../../../hooks/useAxiosSecure'
-// import { toast } from 'react-hot-toast'
-import PropTypes from 'prop-types'
+
+
 
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { toast } from 'react-hot-toast';

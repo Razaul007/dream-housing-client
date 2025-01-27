@@ -1,104 +1,160 @@
 
-import { Link, useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
-import { useForm } from "react-hook-form";
-import GoogleLogin from "../../components/GoogleLogin";
 
-
-
-
-
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { FcGoogle } from 'react-icons/fc';
+import { TbFidgetSpinner } from 'react-icons/tb';
+import useAuth from '../../hooks/useAuth';
+import LoadingSpinner from '../../components/LoadingSpinner';
+import { saveUser } from '../../api/utils';
+import { toast } from 'react-hot-toast';
+import { useState } from 'react';
 
 const Login = () => {
-  const { Login } = useAuth();
-
-  const { register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
+  const { signIn, signInWithGoogle, loading, user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || '/';
 
-  // const onSubmit = (data) => {
-  //     Login(data.email, data.password);
-  //     navigate("/");
-  // };
+  const [error, setError] = useState('');
 
+  if (loading) return <LoadingSpinner />;
+  if (user) return <Navigate to={from} replace={true} />;
 
+  // Form submit handler
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
 
-
-  const onSubmit = async (data) => {
     try {
-      await Login(data.email, data.password);
-      Swal.fire({
-        icon: "success",
-        title: "Login Successful!",
-        text: "Welcome back!",
-        confirmButtonColor: "#3085d6",
-      });
+      // User Login
+      await signIn(email, password);
+      navigate(from, { replace: true });
+      toast.success('Login Successful');
+    } catch (err) {
+      console.log(err);
+      const errorMessage = err?.message || 'An error occurred';
 
+      // Show specific error message from Firebase
+      if (errorMessage.includes('user-not-found')) {
+        setError('Email address not found. Please check your email.');
+      } else if (errorMessage.includes('wrong-password')) {
+        setError('Incorrect password. Please try again.');
+      } else {
+        setError(errorMessage);
+      }
 
-      navigate("/");
-    } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Login Failed",
-        text: error.message,
-        confirmButtonColor: "#d33",
-      });
+      // Optional toast message
+      toast.error(errorMessage);
     }
   };
 
+  // Handle Google Signin
+  const handleGoogleSignIn = async () => {
+    try {
+      const data = await signInWithGoogle();
+      await saveUser(data?.user);
+      navigate(from, { replace: true });
+      toast.success('Login Successful');
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.message || 'Google Sign-In failed');
+    }
+  };
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
-      <div className="hero-content flex-col ">
-        <div className="text-center lg:text-left">
-          <h1 className="text-5xl mb-5 font-bold">Login now!</h1>
-
+    <div className="flex justify-center items-center min-h-screen bg-white">
+      <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
+        <div className="mb-8 text-center">
+          <h1 className="my-3 text-4xl font-bold">Log In</h1>
+          <p className="text-sm text-gray-400">Sign in to access your account</p>
         </div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
+        <form
+          onSubmit={handleSubmit}
+          noValidate=""
+          className="space-y-6 ng-untouched ng-pristine ng-valid"
+        >
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="email" className="block mb-2 text-sm">
+                Email address
               </label>
-              <input type="email" placeholder="email" className="input input-bordered" {...register("email", { required: true })} />
-              {errors.email && (<p className="text-red-500 text-sm font-light">Email is Required!</p>)}
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input type="password" placeholder="password" className="input input-bordered"
-                {...register("password", {
-                  required: "Password is required!",
-                  minLength: {
-                    value: 6,
-                    message: "Password must be at least 6 characters long!",
-                  },
-                  pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
-                    message: "Password must include uppercase, lowercase, number, and special character!",
-                  },
-                })}
+              <input
+                type="email"
+                name="email"
+                id="email"
+                required
+                placeholder="Enter Your Email Here"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
               />
-              {errors.password && (
-                <p className="text-red-500 text-sm font-light">{errors.password.message}</p>
+              {error && error.includes('Email') && (
+                <p className="text-red-500 text-sm mt-1">{error}</p>
               )}
             </div>
-            <div className="form-control mt-6">
-              <button className="btn btn-primary" type="submit">Login</button>
-            </div>
             <div>
-              <GoogleLogin />
+              <div className="flex justify-between">
+                <label htmlFor="password" className="text-sm mb-2">
+                  Password
+                </label>
+              </div>
+              <input
+                type="password"
+                name="password"
+                autoComplete="current-password"
+                id="password"
+                required
+                placeholder="*******"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
+              />
+              {error && error.includes('password') && (
+                <p className="text-red-500 text-sm mt-1">{error}</p>
+              )}
             </div>
-            <label className="label">
-              <p>New here? Please</p>
-              <Link to="/register" className="label-text-alt link link-hover text-blue-500 font-semibold">Register</Link >
-            </label>
-          </form>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              className="bg-lime-500 w-full rounded-md py-3 text-white"
+            >
+              {loading ? (
+                <TbFidgetSpinner className="animate-spin m-auto" />
+              ) : (
+                'Continue'
+              )}
+            </button>
+          </div>
+        </form>
+        <div className="space-y-1">
+          <button className="text-xs hover:underline hover:text-lime-500 text-gray-400">
+            Forgot password?
+          </button>
         </div>
+        <div className="flex items-center pt-4 space-x-1">
+          <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
+          <p className="px-3 text-sm dark:text-gray-400">
+            Login with social accounts
+          </p>
+          <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
+        </div>
+        <div
+          onClick={handleGoogleSignIn}
+          className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
+        >
+          <FcGoogle size={32} />
+          <p>Continue with Google</p>
+        </div>
+        <p className="px-6 text-sm text-center text-gray-400">
+          Don&apos;t have an account yet?{' '}
+          <Link
+            to="/signup"
+            className="hover:underline hover:text-lime-500 text-gray-600"
+          >
+            Sign up
+          </Link>
+          .
+        </p>
       </div>
     </div>
   );
