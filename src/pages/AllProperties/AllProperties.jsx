@@ -19,7 +19,7 @@ const AllProperties = () => {
         },
     });
 
-    // console.log(properties)
+    console.log(properties)
 
     if (isLoading) return <LoadingSpinner />
 
