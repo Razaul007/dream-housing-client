@@ -6,10 +6,12 @@ import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 
 
 
 const MyProperties = () => {
+    const {user} = useAuth()
   const navigate = useNavigate();
 
     const axiosSecure = useAxiosSecure()
@@ -20,7 +22,7 @@ const MyProperties = () => {
     } = useQuery({
       queryKey: ['properties'],
       queryFn: async () => {
-        const { data } = await axiosSecure.get(`/properties/agent`)
+        const { data } = await axiosSecure.get(`/properties?agentEmail=${user.email}`)
   
         return data
       },

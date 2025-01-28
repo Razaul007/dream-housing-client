@@ -4,7 +4,7 @@ import useRole from '../hooks/useRole'
 import LoadingSpinner from '../components/LoadingSpinner'
 
 const AdminRoute = ({ children }) => {
-  const [role, isLoading] = useRole()
+  const [role, isLoading] = useRole();
 
   if (isLoading) return <LoadingSpinner />
   if (role === 'admin') return children

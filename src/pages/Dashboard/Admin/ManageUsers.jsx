@@ -1,10 +1,9 @@
 // import { Helmet } from 'react-helmet-async'
-
-import { useQuery } from "@tanstack/react-query"
-import UserDataRow from "../../../components/Dashboard/TableRows/UserDataRow"
-import useAuth from "../../../hooks/useAuth"
-import useAxiosSecure from "../../../hooks/useAxiosSecure"
-import LoadingSpinner from "../../../components/LoadingSpinner"
+import UserDataRow from '../../../components/Dashboard/TableRows/UserDataRow'
+import { useQuery } from '@tanstack/react-query'
+import useAxiosSecure from '../../../hooks/useAxiosSecure'
+import useAuth from '../../../hooks/useAuth'
+import LoadingSpinner from '../../../components/LoadingSpinner'
 
 
 const ManageUsers = () => {
@@ -21,20 +20,16 @@ const ManageUsers = () => {
       return data
     },
   })
-// console.log(users)
+
   if (isLoading) return <LoadingSpinner />
-
-
   return (
     <>
       <div className='container mx-auto px-4 sm:px-8'>
-        {/* <Helmet>
-          <title>Manage Users</title>
-        </Helmet> */}
+       
         <div className='py-8'>
           <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
-            <div className='  shadow rounded-lg '>
-              <table className=' leading-normal'>
+            <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
+              <table className='min-w-full leading-normal'>
                 <thead>
                   <tr>
                     <th

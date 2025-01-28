@@ -6,12 +6,12 @@ import useAuth from '../hooks/useAuth'
 
 
 const PrivateRoute = ({ children }) => {
-  const { user, loading } = useAuth()
-  const location = useLocation()
+  const { user, loading } = useAuth();
+  
 
   if (loading) return <LoadingSpinner />
   if (user) return children
-  return <Navigate to='/login' state={{ from: location }} replace='true' />
+  return <Navigate to='/login'  replace='true' />
 }
 
 

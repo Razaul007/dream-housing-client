@@ -75,104 +75,74 @@ export const router = createBrowserRouter([
         index: true,
         element: (
 
-         <PrivateRoute> <Profile /></PrivateRoute>
+          <Profile />
 
         ),
       },
     
       {
         path:'manage-users' ,
-        element: (
-          <PrivateRoute>
-            <AdminRoute>
-              <ManageUsers />
-            </AdminRoute>
-          </PrivateRoute>
-
-        ),
+        element:  <ManageUsers />,
       },
       {
         path: 'manage-properties',
-        element: (
-          <PrivateRoute>
-            <AdminRoute>
-              <ManageProperties />
-            </AdminRoute>
-          </PrivateRoute>
-
-        ),
+        element: <ManageProperties/>,
       },
       {
         path: 'Manage-reviews',
-        element: (
-          <PrivateRoute>
-            <AdminRoute>
-              <ManageReviews />
-            </AdminRoute>
-          </PrivateRoute>
-
-        ),
+        element: <ManageReviews />,
       },
    
       {
         path: 'add-property',
-        element:  
-               <PrivateRoute>
-                  <AgentRoute>
-                     <AddProperty />
-                   </AgentRoute>
-               </PrivateRoute>
+        element:  <AddProperty />
+               
           
                   
                 
       },
       {
         path: 'my-properties',
-        element:  <PrivateRoute><AgentRoute> 
-                     <MyProperties />
-                 </AgentRoute></PrivateRoute>
+        element:  <MyProperties />
+                 
                   
                 
       },         
       {
         path: 'update/:id',
-        element: <PrivateRoute>
-          <AgentRoute><UpdateProperty /></AgentRoute>
-        </PrivateRoute>
+        element: <UpdateProperty />
+      
                         
                        
       },
       {
         path: 'my-wishlist',
-        element: <PrivateRoute>
-          <Wishlist />
-        </PrivateRoute>
+        element: <Wishlist />
+       
       },
       {
         path: 'make-offer',
-        element: <PrivateRoute>
+        element: 
           <MakeOffer />
-        </PrivateRoute>
+        
       },
       {
         path: 'property-bought',
-        element:
-            <PrivateRoute><PropertyBought /></PrivateRoute>
+        element:<PropertyBought />
        
       },
       {
         path: 'my-reviews',
-        element: <PrivateRoute><MyReviews /></PrivateRoute>
+        element: <MyReviews />
       },
       {
         path:'sold-properties',
-        element: <AgentRoute>
-              <PrivateRoute><MySoldProperties/></PrivateRoute>
-        </AgentRoute>
+        element: <MySoldProperties/>
+        
       },
       {
         path:'requested-properties',
-        element: <PrivateRoute><AgentRoute><RequestedProperties/></AgentRoute></PrivateRoute>
+        element: <RequestedProperties/>
       },
     
     ]

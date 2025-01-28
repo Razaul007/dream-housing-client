@@ -1,15 +1,17 @@
-import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
-import axios from "axios";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useAuth from "../../../hooks/useAuth";
+
 import LoadingSpinner from "../../../components/LoadingSpinner";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+
+
+
+
  
 
 const RequestedProperties = () => {
 
-    
+    const {user} = useAuth();
     const axiosSecure = useAxiosSecure(); 
     
     const {
@@ -19,7 +21,7 @@ const RequestedProperties = () => {
     } = useQuery({
       queryKey: ['offers'],
       queryFn: async () => {
-        const { data } = await axiosSecure.get(`/offers/agent`)
+        const { data } = await axiosSecure.get(`/offers/${user.email}`)
   
         return data
       },
