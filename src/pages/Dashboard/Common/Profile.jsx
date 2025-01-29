@@ -1,12 +1,12 @@
 import useAuth from '../../../hooks/useAuth'
 import coverImg from '../../../assets/images/cover.jpg'
-import useRole from '../../../hooks/useRole'
 import LoadingSpinner from '../../../components/LoadingSpinner'
+import useRole from '../../../hooks/useRole';
 
 const Profile = () => {
   const { user, loading } = useAuth();
   const [role, isLoading] = useRole();
-//  console.log(role)
+ console.log(role)
 
   if ((loading, isLoading)) return <LoadingSpinner />
   return (

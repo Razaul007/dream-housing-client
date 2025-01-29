@@ -6,14 +6,17 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import useAuth from '../hooks/useAuth';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 
 
 const PropertyDetails = () => {
     const {user} = useAuth();
+    const axiosSecure = useAxiosSecure()
     const navigate = useNavigate();
     console.log(user)
-    const { id } = useParams(); // Get property ID from route
+    const { id } = useParams(); 
+    console.log(id)
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [reviewText, setReviewText] = useState("");
 
@@ -22,7 +25,7 @@ const PropertyDetails = () => {
          isLoading: propertyLoading, refetch } = useQuery({
         queryKey: ['property', id],
         queryFn: async () => {
-            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/properties/${id}`);
+            const { data } = await axiosSecure.get(`/property/${id}`);
             return data;
         },
     });
@@ -130,11 +133,11 @@ const PropertyDetails = () => {
                     </p>
                     <div className="flex items-center mb-4">
                         <img
-                            src={property.agent.image}
-                            alt={property.agent.name}
+                            src={property.agent?.image}
+                            alt={property.agent?.name}
                             className="w-12 h-12 rounded-full mr-4"
                         />
-                        <p className="text-gray-700">Agent: {property.agent.name}</p>
+                        <p className="text-gray-700">Agent: {property.agent?.name}</p>
                     </div>
                 </div>
                 <div className="mb-6">

@@ -17,7 +17,7 @@ const Wishlist = () => {
             const { data } = await axiosSecure.get(`/my-wishlist/${user?.email}`);
             return data;
         },
-        enabled: !!user?.email, // Only fetch data if the user is logged in and has an email
+        enabled: !!user?.email,
     });
     console.log(wishlist)
     //     // Remove property from wishlist
@@ -59,11 +59,11 @@ const Wishlist = () => {
                             />
                             <h3 className="text-xl font-bold">{property.title}</h3>
                             <p>Location: {property.location}</p>
-                            <p>Agent: {property.agent.name}</p>
-                            <p>Agent Email: {property.agent.email}</p>
+                            <p>Agent: {property.agent?.name}</p>
+                            <p>Agent Email: {property.agent?.email}</p>
                             <img
-                                src={property.agent.image}
-                                alt={property.agent.name}
+                                src={property.agent?.image}
+                                alt=""
                                 className="w-10 h-10 rounded-full mt-2"
                             />
                             <p>Verification Status: {property.status}</p>
