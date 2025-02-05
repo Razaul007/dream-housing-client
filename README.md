@@ -42,7 +42,7 @@ DreamHouzing is a web-based platform designed for seamless property buying, sell
 ### Steps to Set Up Locally
 1. Clone the repository:
    ```bash
-   git clone `https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-Razaul007`
+   git clone `https://github.com/Razaul007/dream-housing-client`
    `https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-Razaul007`
 
    ```
