@@ -123,5 +123,5 @@ This project is licensed under the MIT License.
 ## Contact
 For any inquiries or feedback, please reach out to:
 - **Name**: Muhammad Razaul Alam
-- **Email**: razafulalam05@gmail.com
+- **Email**: razaulalam05@gmail.com
 
