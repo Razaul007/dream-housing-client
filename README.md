@@ -1,4 +1,7 @@
 # DreamHouzing
+## 📸 Screenshot  
+![Project Screenshot](https://i.ibb.co.com/7dq3YrXd/dream-Houzing.jpg)) 
+
 
 DreamHouzing is a web-based platform designed for seamless property buying, selling, and management. It connects property owners, agents, and buyers to create an intuitive real estate experience.
 
