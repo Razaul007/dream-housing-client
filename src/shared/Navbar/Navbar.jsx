@@ -13,7 +13,7 @@ const Navbar = () => {
     return (
         <div className=' w-full bg-white  shadow-sm mb-5'>
             <div className='py-4 border-b-[1px]'>
-                <div className='flex flex-row  items-center justify-between gap-3 md:gap-0'>
+                <div className='flex flex-row  items-center justify-between gap-3 md:gap-0 max-w-[1280px] mx-auto'>
                     {/* Logo */}
                     <div className='flex items-center gap-1 '>
                         <Link >
@@ -34,6 +34,12 @@ const Navbar = () => {
                             className='hidden lg:block  px-4 py-3 hover:bg-neutral-100 transition font-bold'
                         >
                             All Properties
+                        </NavLink>
+                        <NavLink
+                            to='/dashboard'
+                            className='hidden lg:block  px-4 py-3 hover:bg-neutral-100 transition font-bold'
+                        >
+                            Dashboard
                         </NavLink>
                     </div>
                     {/* Dropdown Menu */}

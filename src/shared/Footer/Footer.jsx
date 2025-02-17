@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '/logo.jpg'
 const Footer = () => {
     return (
-        <footer className=" bg-cyan-600 text-white p-10 mb-10">
+        <footer className=" bg-cyan-600 text-white p-10">
             <div className='flex justify-around items-center mb-5'>
                 <aside>
                     <img src={logo} alt="" className='w-10 h-10 rounded-3xl' />
