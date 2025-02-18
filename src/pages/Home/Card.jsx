@@ -47,12 +47,10 @@ const Card = ({ property }) => {
         <div className='font-semibold'>Min Price: {minPrice}$</div>
         <div className='font-semibold'>Max Price: {maxPrice}$</div>
         <div className='font-semibold'>Agent: {agent.name}</div>
-        {/* <div className='font-semibold'>Agent: {agent.image}</div> */}
         <div className=' text-green-400 font-bold'>Status: {verificationStatus}</div>
         <div >
          
          <button 
-            // onClick={() => handleViewDetails(_id)}
 
            className='bg-cyan-600 text-center p-2 rounded-lg' type="button" >View Details</button>
          
