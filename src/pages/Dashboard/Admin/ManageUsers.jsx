@@ -24,8 +24,8 @@ const ManageUsers = () => {
   if (isLoading) return <LoadingSpinner />
   return (
     <>
-      <div className='container mx-auto px-4 sm:px-8'>
-       
+      <div className='lg:max-w-6xl mx-auto p-6'>
+          <h1 className='text-2xl font-bold mb-4 text-center'>Mange Users</h1>
         <div className='py-8'>
           <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
             <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>

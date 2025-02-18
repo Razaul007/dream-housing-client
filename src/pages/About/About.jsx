@@ -71,7 +71,7 @@ const About = () => {
             {/* Contact Section */}
             <div className="text-center">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Contact Us</h2>
-                <p className="text-gray-600">📍 123 Real Estate St, NewYork, America</p>
+                <p className="text-gray-600">📍 123, Real Estate St, NewYork, America</p>
                 <p className="text-gray-600">📞 +123 456 7890</p>
                 <p className="text-gray-600">📧 contact@dreamhouzing.com</p>
             </div>
