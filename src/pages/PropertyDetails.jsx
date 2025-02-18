@@ -11,24 +11,24 @@ import useAxiosSecure from '../hooks/useAxiosSecure';
 
 
 const PropertyDetails = () => {
-    const {user} = useAuth();
+    const { user } = useAuth();
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate();
     console.log(user)
-    const { id } = useParams(); 
+    const { id } = useParams();
     console.log(id)
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [reviewText, setReviewText] = useState("");
 
     // Fetch property details
-    const { data: property =[],
-         isLoading: propertyLoading, refetch } = useQuery({
-        queryKey: ['property', id],
-        queryFn: async () => {
-            const { data } = await axiosSecure.get(`/property/${id}`);
-            return data;
-        },
-    });
+    const { data: property = [],
+        isLoading: propertyLoading, refetch } = useQuery({
+            queryKey: ['property', id],
+            queryFn: async () => {
+                const { data } = await axiosSecure.get(`/property/${id}`);
+                return data;
+            },
+        });
     console.log(property)
     // Fetch reviews for the property
     const { data: reviews, isLoading: reviewsLoading, refetch: refetchReviews } = useQuery({
@@ -40,29 +40,29 @@ const PropertyDetails = () => {
     });
 
     // Add property to wishlist
-  
+
     const handleAddToWishlist = async () => {
         try {
             const propertyData = {
                 id,
                 customer: {
-                    email:user?.email,
-                    name:user.displayName,
-                    image:user.photoURL
-                },                     
-                image: property?.imageURL, 
-                title: property?.title,    
+                    email: user?.email,
+                    name: user.displayName,
+                    image: user.photoURL
+                },
+                image: property?.imageURL,
+                title: property?.title,
                 location: property?.location,
                 agent: {
-                    name:property?.agent?.name,       
-                    email:property?.agent?.email,       
-                    image: property?.agent?.image,  
+                    name: property?.agent?.name,
+                    email: property?.agent?.email,
+                    image: property?.agent?.image,
                 },
-                status: property.verificationStatus,      
-                minPrice: property?.minPrice, 
-                maxPrice: property?.maxPrice  
+                status: property.verificationStatus,
+                minPrice: property?.minPrice,
+                maxPrice: property?.maxPrice
             };
-        //  console.log(propertyData)
+            //  console.log(propertyData)
             await axios.post(`${import.meta.env.VITE_API_URL}/wishlist`, propertyData);
             Swal.fire({
                 position: "top-end",
@@ -70,39 +70,40 @@ const PropertyDetails = () => {
                 title: "Property added to wishlist!",
                 showConfirmButton: false,
                 timer: 1500
-              });
-    
-           
-       
-        navigate('/dashboard/my-wishlist')
+            });
+
+
+
+            navigate('/dashboard/my-wishlist')
         } catch (error) {
             if (error.response && error.response.data.error === "Only users can add properties to the wishlist.") {
                 toast.error("Only users can do this!");
-              
+
             } else {
                 toast.error("Failed to add property to wishlist. Please try again.");
-            }}
+            }
+        }
     };
-    
+
 
     // Add a review
     const handleAddReview = async () => {
-        
+
         try {
             const reviewData = {
-                id,    
-                title:property.title,                 
-                image: user?.photoURL, 
-                name: user?.displayName, 
-                email: user?.email, 
-                text:reviewText , 
+                id,
+                title: property.title,
+                image: user?.photoURL,
+                name: user?.displayName,
+                email: user?.email,
+                text: reviewText,
                 // reviewTime: new Date()
                 reviewTime: new Date().toISOString()
-            
+
             };
-            await axios.post(`${import.meta.env.VITE_API_URL}/reviews`,reviewData);
+            await axios.post(`${import.meta.env.VITE_API_URL}/reviews`, reviewData);
             setIsModalOpen(false);
-            refetchReviews(); 
+            refetchReviews();
             setReviewText("");
             navigate('/dashboard/my-reviews');
         } catch (error) {
@@ -110,7 +111,7 @@ const PropertyDetails = () => {
         }
     };
 
-    if (propertyLoading || reviewsLoading) return <div><LoadingSpinner/></div>;
+    if (propertyLoading || reviewsLoading) return <div><LoadingSpinner /></div>;
 
     return (
         <div className=" lg:w-3/4 mx-auto lg:flex items-center gap-10 p-6">
@@ -140,38 +141,42 @@ const PropertyDetails = () => {
                         <p className="text-gray-700">Agent: {property.agent?.name}</p>
                     </div>
                 </div>
-                <div className="mb-6">
-                  
-                    <button
-                        className="btn btn-primary mt-4"
-                        onClick={handleAddToWishlist}
-                    >
-                        Add to Wishlist
-                    </button>
-                </div>
+                {user &&
+                    <div>
+                        <div className="mb-6">
 
-                {/* Review Section */}
-                <div className="mt-6">
-                    <h2 className="text-xl font-bold">Reviews</h2>
-                    <div className="space-y-4">
-                        {reviews?.length > 0 ? (
-                            reviews.map((review, index) => (
-                                <div key={index} className="p-4 border rounded">
-                                    <p>{review.text}</p>
-                                    <span className="text-sm text-gray-500">By {review.user}</span>
-                                </div>
-                            ))
-                        ) : (
-                            <p>No reviews yet.</p>
-                        )}
+                            <button
+                                className="btn btn-primary mt-4"
+                                onClick={handleAddToWishlist}
+                            >
+                                Add to Wishlist
+                            </button>
+                        </div>
+
+                        {/* Review Section */}
+                        <div className="mt-6">
+                            <h2 className="text-xl font-bold">Reviews</h2>
+                            <div className="space-y-4">
+                                {reviews?.length > 0 ? (
+                                    reviews.map((review, index) => (
+                                        <div key={index} className="p-4 border rounded">
+                                            <p>{review.text}</p>
+                                            <span className="text-sm text-gray-500">By {review.user}</span>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p>No reviews yet.</p>
+                                )}
+                            </div>
+                            <button
+                                className="btn btn-secondary mt-4"
+                                onClick={() => setIsModalOpen(true)}
+                            >
+                                Add a Review
+                            </button>
+                        </div>
                     </div>
-                    <button
-                        className="btn btn-secondary mt-4"
-                        onClick={() => setIsModalOpen(true)}
-                    >
-                        Add a Review
-                    </button>
-                </div>
+                }
 
                 {/* Review Modal */}
                 {isModalOpen && (
