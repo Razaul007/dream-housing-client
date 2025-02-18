@@ -36,10 +36,10 @@ const Navbar = () => {
                             All Properties
                         </NavLink>
                         <NavLink
-                            to='/dashboard'
+                            to='/about'
                             className='hidden lg:block  px-4 py-3 hover:bg-neutral-100 transition font-bold'
                         >
-                            Dashboard
+                            About Us
                         </NavLink>
                     </div>
                     {/* Dropdown Menu */}

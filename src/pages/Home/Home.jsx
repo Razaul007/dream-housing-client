@@ -4,12 +4,21 @@ import Banner from './Banner';
 import Contact from './Contact';
 import LastReviews from './LastReviews';
 import Accordion from './Accordion';
+import Newsletter from './Newsletter';
+import AboutUs from './AboutUs';
+import WhyChooseUs from './WhyChooseUs';
 
 const Home = () => {
     return (
         <div className="max-w-[1280px] mx-auto mt-5" >
             <div className='mb-10'>
                 <Banner />
+            </div>
+            <div className='mb-10'>
+                <AboutUs />
+            </div>
+            <div className='mb-10'>
+                <WhyChooseUs />
             </div>
             <div>
                 <h1 className=' text-3xl font-bold text-center m-5'> Advertisement</h1>
@@ -21,6 +30,10 @@ const Home = () => {
             <div className="my-24 mx-8">
                 <Contact />
             </div>
+            <div className="my-24 mx-8">
+                <Newsletter />
+            </div>
+
             <div className="my-24 mx-8">
                 <h1 className="text-3xl font-bold my-16 text-center">Frequently Asked Questions</h1>
                 <Accordion />

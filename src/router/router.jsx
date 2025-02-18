@@ -24,6 +24,7 @@ import AllProperties from "../pages/AllProperties/AllProperties";
 import MySoldProperties from "../pages/Dashboard/Agent/MySoldProperties";
 import RequestedProperties from "../pages/Dashboard/Agent/RequestedProperties";
 import Payment from "../pages/Dashboard/Customer/Payment";
+import About from "../pages/About/About";
 
 
 
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
       {
         path: '/signup',
         element: <SignUp />
+      },
+      {
+        path: '/about',
+        element: <About />
       },
       {
         path:'payment/:id',
