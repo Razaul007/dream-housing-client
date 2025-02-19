@@ -55,6 +55,40 @@ const Login = () => {
           <p className='text-sm text-gray-400'>
             Sign in to access your account
           </p>
+          <div>
+            <div>
+              {/* Open the modal using document.getElementById('ID').showModal() method */}
+              <button className="btn" onClick={() => document.getElementById('my_modal_2').showModal()}>Admin credentials</button>
+              <dialog id="my_modal_2" className="modal">
+                <div className="modal-box">
+                  <h3 className="font-bold text-lg">Email: admin@gamil.com</h3>
+                  <h3 className="font-bold text-lg">Password: Admin@1234</h3>
+                  <p className="py-4">Press ESC key or click outside to close</p>
+                </div>
+                <form method="dialog" className="modal-backdrop">
+                  <button>close</button>
+                </form>
+              </dialog>
+            </div>
+
+            <div>
+              {/* You can open the modal using document.getElementById('ID').showModal() method */}
+              <button className="btn" onClick={() => document.getElementById('my_modal_3').showModal()}>Agent credentials</button>
+              <dialog id="my_modal_3" className="modal">
+                <div className="modal-box">
+                  <form method="dialog">
+                    {/* if there is a button in form, it will close the modal */}
+                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                  </form>
+                  <h3 className="font-bold text-lg">Email: jhon@gmail.com</h3>
+                  <h3 className="font-bold text-lg">Password: Jhon@1234</h3>
+                  <p className="py-4">Press ESC key or click on ✕ button to close</p>
+                </div>
+              </dialog>
+            </div>
+
+
+          </div>
         </div>
         <form
           onSubmit={handleSubmit}
